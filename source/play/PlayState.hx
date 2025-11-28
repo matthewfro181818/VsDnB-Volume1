@@ -798,7 +798,7 @@ class PlayState extends MusicBeatState
 		if (camHUDZoom.canWorldZoom)
 			camHUD.zoom = MathUtil.smoothLerp(camHUD.zoom, defaultHUDZoom, elapsed, 0.75, 1 / 1000);
 
-		if (health <= 0 && !isPlayerDying)
+		if (health <= 0 && !isPlayerDying && !botPlay)
 		{
 			gameOver();
 		}
