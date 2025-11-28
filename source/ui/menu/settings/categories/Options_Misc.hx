@@ -46,20 +46,6 @@ class Options_Misc extends SettingsCategory
 		checkbox_hitsounds.setChecked(Preferences.hitsounds, false, true);
 		list.push(checkbox_hitsounds);
 		add(checkbox_hitsounds);
-
-		
-		var checkbox_botplay = new CheckboxOption(400, 300, {
-			name: LanguageManager.getTextString('settings_misc_botplay'),
-			description: LanguageManager.getTextString('settings_misc_botplay_description'),
-			callback: function(value:Bool)
-			{
-				Preferences.botplay = value;
-			}
-		});
-		checkbox_botplay.setChecked(Preferences.botplay, false, true);
-		list.push(checkbox_botplay);
-		add(checkbox_botplay);
-
 		
 		var option_latencyOffsets = new NumericStepperOption(425, 400, {
 			name: LanguageManager.getTextString('settings_misc_latencyOffsets'),
