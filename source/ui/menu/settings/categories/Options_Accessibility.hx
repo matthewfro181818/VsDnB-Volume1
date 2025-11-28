@@ -20,18 +20,6 @@ class Options_Accessibility extends SettingsCategory
 		list.push(checkbox_flashingLights);
 		add(checkbox_flashingLights);
 
-		var checkbox_botplay = new CheckboxOption(400, 300, {
-			name: LanguageManager.getTextString('settings_accessibility_botplay'),
-			description: LanguageManager.getTextString('settings_accessibility_botplay_description'),
-			callback: function(value:Bool)
-			{
-				Preferences.botplay = value;
-			}
-		});
-		checkbox_botplay.setChecked(Preferences.botplay, false, true);
-		list.push(checkbox_botplay);
-		add(checkbox_botplay);
-
 		var checkbox_cameraShaking = new CheckboxOption(400, 400, {
 			name: LanguageManager.getTextString('settings_accessibility_cameraShaking'),
 			description: LanguageManager.getTextString('settings_accessibility_cameraShaking_description'),
