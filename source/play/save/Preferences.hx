@@ -28,6 +28,8 @@ class Preferences
 		'ghostTapping' => true,
 		'cutscenes' => true,
 
+		'botplay' => false,
+
 		'flashingLights' => true,
 		'cameraShaking' => true,
 		'cameraNoteMovement' => true,
@@ -182,9 +184,19 @@ class Preferences
 		return value;
 	}
 
-	static function get_flashingLights():Bool
+	public static var botplay(get, set):Bool;
+
+	static function get_botplay():Bool
 	{
-		return save?.data?.flashingLights;
+		return save?.data?.botplay;
+	}
+
+	static function set_botplay(value:Bool):Bool
+	{
+		save.data.botplay = value;
+		save.flush();
+		onPreferenceChanged.dispatch('botplay', value);
+		return value;
 	}
 
 	/**
