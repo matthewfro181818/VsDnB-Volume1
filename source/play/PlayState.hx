@@ -362,6 +362,10 @@ class PlayState extends MusicBeatState
 	 */
 	public var crazyZooming(default, set):Bool;
 	
+	public static var botPlay:Bool = false;
+	public var botplaySine:Float = 0;
+	public var botplayTxt:FlxText;
+
 	public function set_crazyZooming(value:Bool)
 	{
 		value ? {
@@ -650,6 +654,8 @@ class PlayState extends MusicBeatState
 		initPreferences();
 		initalizeSongData();
 
+		botPlay = FlxG.save.data.botplay;
+	
 		initStage();
 		initCharacters();
 
