@@ -693,6 +693,27 @@ class PlayState extends MusicBeatState
 				return;
 			}
 		}
+				if(daNote.mustPress && botPlay) {
+					if(daNote.strumTime <= Conductor.instance.songPosition || (daNote.canBeHit)) {
+						goodNoteHit(daNote);
+						boyfriend.holdTimer = 0;
+					}
+				}
+		
+				var noteSpeed = (daNote.LocalScrollSpeed == 0 ? 1 : daNote.LocalScrollSpeed);
+
+				if (daNote.mustPress && Conductor..songPosition >= daNote.strumTime + (350 / (0.45 * FlxMath.roundDecimal(SongData.speed * noteSpeed, 2))))
+				{
+					if (!botPlay) {
+						if (!noMiss)
+							noteMiss(daNote.originalType, daNote);
+	
+						vocals.volume = 0;
+					}
+
+					destroyNote(daNote);
+				}
+			});
 		
 		health = Math.min(health, 2);
 		healthLerp = FlxMath.lerp(healthLerp, health, 0.3);
@@ -1517,6 +1538,13 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 		generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
 
+		if (SONG.validScore && !botPlay)
+		{
+			trace("score is valid");
+
+			FlxG.save.flush();
+		}
+
 		for (strumLine in [playerStrums, dadStrums])
 		{
 			strumLine.canUpdate = false;
@@ -1940,7 +1968,7 @@ class PlayState extends MusicBeatState
 		{
 			focusOnDadGlobal = !currentSection.mustHitSection;
 			ZoomCam(!currentSection.mustHitSection);
-
+			
 			dispatchEvent(new CameraScriptEvent(CAMERA_MOVE_SECTION, !currentSection.mustHitSection, false));
 		}
 	}
@@ -2451,14 +2479,26 @@ class PlayState extends MusicBeatState
 	 */
 	function makeInvisibleNotes(invisible:Bool):Void
 	{
-		for (i in [playerStrums, dadStrums])
-		{
-			i.forEachStrum(function(strumNote:StrumNote)
+
+			playerStrums.forEach(function(spr:StrumNote)
 			{
-				FlxTween.cancelTweensOf(strumNote);
-				FlxTween.tween(strumNote, {alpha: (invisible ? 0 : 1)}, 1);
+				if(botPlay) {
+					if (Math.abs(Math.round(Math.abs(note.noteData)) % playerStrumAmount) == spr.ID)
+					{
+						spr.playAnim('confirm', true);
+						spr.animation.finishCallback = function(name:String)
+						{
+							spr.playAnim('static', true);
+						}
+					}
+					spr.pressingKey5 = note.noteStyle == 'shape';
+				} else {
+					if (Math.abs(note.noteData) == spr.ID)
+					{
+						spr.playAnim('confirm', true);
+					}
+				}
 			});
-		}
 	}
 
 	/**
