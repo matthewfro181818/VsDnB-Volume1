@@ -36,7 +36,18 @@ jobs:
           haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install hxcpp > /dev/null --quiet
           haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-tools
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install actuate
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib install hxCodec
+          haxelib install hscript-iris
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
@@ -65,7 +76,18 @@ jobs:
           haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install hxcpp > /dev/null --quiet
           haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-tools
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install actuate
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib install hxCodec
+          haxelib install hscript-iris
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
         shell: cmd
@@ -95,7 +117,18 @@ jobs:
           haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install hxcpp > /dev/null --quiet
           haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-tools
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install actuate
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib install hxCodec
+          haxelib install hscript-iris
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
