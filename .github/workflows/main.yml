@@ -48,6 +48,7 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib install hscript-iris
+          haxelib install hxvlc
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
@@ -88,6 +89,7 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib install hscript-iris
+          haxelib install hxvlc
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
         shell: cmd
@@ -129,6 +131,7 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib install hscript-iris
+          haxelib install hxvlc
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
