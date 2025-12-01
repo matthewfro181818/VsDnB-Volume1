@@ -33,6 +33,7 @@ jobs:
         run: |
           sudo apt-get install libvlc-dev libvlccore-dev glibc-source libidn-dev libidn12
           haxelib setup ~/haxelib
+          haxelib install hmm
           haxelib run hmm setup
           hmm install
           haxelib install lime
