@@ -234,6 +234,9 @@ public var strumLinePlayer:Strumline;
 
 public var strumline:Strumline;
 
+public var keyCount:Int = 4;     // actual number of columns
+public var mania:Int = 3;        // based on mania = keyCount - 1
+
 private function botplayHit(note:Note)
 {
     // Mark as hit
@@ -862,6 +865,21 @@ function updateBotplay(elapsed:Float)
 		generateSong();
 
 		prepareSong();
+if (Reflect.hasField(PlayState.SONG, "keyCount"))
+{
+	keyCount = PlayState.SONG.keyCount;
+	mania = keyCount - 1;
+}
+else if (Reflect.hasField(PlayState.SONG, "mania"))
+{
+	mania = PlayState.SONG.mania;
+	keyCount = mania + 1;
+}
+else
+{
+	keyCount = 4;
+	mania = 3;
+}
 
 		super.create();
 	}
