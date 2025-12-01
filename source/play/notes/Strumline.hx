@@ -353,23 +353,59 @@ class Strumline extends FlxSpriteGroup
 	 * Generates a group of strum receptors for this strumline to use.
 	 * @param fadeIn Whether there should be a fade-in effect when the strums are created.
 	 */
-	public function generateStaticArrows(fadeIn:Bool):Void
-	{
-		for (i in 0...strumAmount)
-		{
-			var babyArrow:StrumNote = new StrumNote(0.0, 0.0, noteStyle, i, isPlayer);
 
-			babyArrow.x += NOTE_WIDTH * Math.abs(i);
-			strums.add(babyArrow);
-			
-			babyArrow.baseX = babyArrow.x - strums.x;
-			if (!params.showStrums)
-				babyArrow.alpha = 0.0;
+public function generateStaticArrows(player:Int)
+{
+	var centerX = ClientPrefs.data.middleScroll
+		? STRUM_X_MIDDLESCROLL
+		: STRUM_X;
+
+	var startY = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
+
+	for (i in 0...keyCount)
+	{
+		var strum = new Note(centerX, startY, i, player);
+		strum.isSustainNote = false;
+		strum.scrollFactor.set();
+
+		// resets all animations first
+		strum.animation.destroyAnimations();
+
+		// square noteskin if available
+		var frames = null;
+		try frames = Paths.getSparrowAtlas("noteSkins/square")
+		catch(e) frames = Paths.getSparrowAtlas("NOTE_assets");
+
+		if (frames != null) strum.frames.addAtlas(frames);
+
+		var animName = MultiKey.noteAnimations[keyCount-1][i];
+
+		strum.animation.addByPrefix("static", "arrow" + animName.toUpperCase(), 24, false);
+		strum.animation.addByPrefix("pressed", animName + " press", 24, false);
+		strum.animation.addByPrefix("confirm", animName + " confirm", 24, false);
+
+		strum.playAnim("static");
+
+		// Position according to multi-key layout
+		MultiKey.positionStrum(strum);
+
+		if (player == 1)
+			playerStrums.add(strum);
+		else
+		{
+			if (ClientPrefs.data.middleScroll)
+			{
+				strum.x += 310;
+				if (i > Math.floor(keyCount / 2) - 1)
+					strum.x += FlxG.width / 2 + 25;
+			}
+
+			opponentStrums.add(strum);
 		}
-        if (fadeIn)
-            fadeNotes();
+
+		strumLineNotes.add(strum);
 	}
-	
+}
 	/**
 	 * Re-generates the strums receptors of this strumline.
 	 * @param fadeIn Whether there should be a fade-in effect when the strums are created.
