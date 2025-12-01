@@ -55,12 +55,6 @@ class HudDisplay extends FlxSpriteGroup implements IHudItem
 	 */
 	public var scrollType(default, set):String;
 
-	public static var botPlay:Bool = false;
-	public var botplaySine:Float = 0;
-	public var botplayTxt:FlxText;
-
-	private var healthBar:HealthBar;
-
 	function set_scrollType(value:String):String
 	{
 		y = (value == 'downscroll' ? 75 : 675);
@@ -104,6 +98,8 @@ class HudDisplay extends FlxSpriteGroup implements IHudItem
 	 */
 	public var textUpdateFunc:Float->Void;
 
+    public var botText:FlxText;
+
 	public function new(x:Float, params:HudDisplayParams)
 	{
 		if (params == null)
@@ -134,14 +130,24 @@ class HudDisplay extends FlxSpriteGroup implements IHudItem
 		text.antialiasing = true;
 		add(text);
 		text.setPosition(icon.x + icon.width + 5, icon.y - (text.textField.height - icon.height) / 2);
-		
-		botplayTxt = new FlxText(PlayState.healthBar.x + PlayState.healthBar.width / 2 - 75, PlayState.healthBar.y + (FlxG.save.data.downscroll ? 100 : -100), 0,
-		"BOTPLAY", 20);
-		text.setFormat(Paths.font('comic.ttf'), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 3;
-		botplayTxt.visible = botPlay;
-		add(botplayTxt);
+
+// =========================================================
+// BOTPLAY HUD TEXT (Psych Engine Style)
+// =========================================================
+botText = new FlxText(0, 0, 0, "BOTPLAY", 32);
+botText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+botText.borderSize = 2;
+botText.scrollFactor.set();
+botText.visible = Preferences.botplay;
+botText.y = Preferences.downscroll ? 600 : 40;
+
+botText.screenCenter(X);
+
+// Only visible if botplay is enabled
+botText.visible = Preferences.botplay;
+
+add(botText);
+
 	}
 
 	public override function update(elapsed:Float)

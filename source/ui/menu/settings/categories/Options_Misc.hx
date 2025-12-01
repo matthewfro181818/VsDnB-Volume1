@@ -46,7 +46,7 @@ class Options_Misc extends SettingsCategory
 		checkbox_hitsounds.setChecked(Preferences.hitsounds, false, true);
 		list.push(checkbox_hitsounds);
 		add(checkbox_hitsounds);
-		
+
 		var option_latencyOffsets = new NumericStepperOption(425, 400, {
 			name: LanguageManager.getTextString('settings_misc_latencyOffsets'),
 			description: LanguageManager.getTextString('settings_misc_latencyOffsets_description'),

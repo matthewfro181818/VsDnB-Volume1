@@ -846,7 +846,7 @@ class Strumline extends FlxSpriteGroup
 	 * @param holdNote The hold note to build the hold cover off of.
 	 * @return A new hold cover ready to be used.
 	 */
-	function startHoldCover(holdNote:SustainNote):HoldCover
+	public function startHoldCover(holdNote:SustainNote):HoldCover
 	{
 		var noteStyle:NoteStyle = holdNote.noteStyle;
 
