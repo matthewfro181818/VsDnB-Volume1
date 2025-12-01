@@ -33,9 +33,9 @@ jobs:
         run: |
           sudo apt-get install libvlc-dev libvlccore-dev glibc-source libidn-dev libidn12
           haxelib setup ~/haxelib
-          haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install lime
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
@@ -64,6 +64,7 @@ jobs:
           haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install lime
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
         shell: cmd
@@ -93,6 +94,7 @@ jobs:
           haxelib install hmm
           haxelib run hmm setup
           hmm install
+          haxelib install lime
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib list
       - name: Create Version Tag
